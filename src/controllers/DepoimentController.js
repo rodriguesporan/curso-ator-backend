@@ -1,20 +1,20 @@
-const mongoose = require('mongoose');
 const Depoiment = require('../models/DepoimentModel');
-
-mongoose.connect(
-  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PWD}@cluster0-rblgj.mongodb.net/test?retryWrites=true&w=majority`,
-  { useNewUrlParser: true, }
-);
 
 module.exports = {
   list: async (req, res) => {
-    var result = await Depoiment.find({});
-    res.json(result);
+    const depoiments = await Depoiment.find({});
+    res.json(depoiments);
   },
-  create: (req, res) => {
-    res.json(req.body);
+  create: async (req, res) => {
+    const { actor, depoiment } = req.body;
+    const { filename: image } = req.file;
+    const dep = await Depoiment.create({ actor, depoiment, image, });
+    res.json(dep);
+
   },
-  show: (req, res) => {
-    res.send(`Depoiment ${req.params.id}`);
+  show: async (req, res) => {
+    const { id } = req.params;
+    const depoiment = await Depoiment.findById(id);
+    res.json(depoiment);
   },
 };
