@@ -7,7 +7,7 @@ module.exports = {
   },
   create: async (req, res) => {
     const { actor, depoiment } = req.body;
-    const { key: image, location: url = '' } = req.file;
+    const { key: image, location: url = `http://localhost:5000/files/${image}` } = req.file;
     const dep = await Depoiment.create({
       actor,
       depoiment,
