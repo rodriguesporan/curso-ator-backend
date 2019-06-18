@@ -7,8 +7,13 @@ module.exports = {
   },
   create: async (req, res) => {
     const { actor, depoiment } = req.body;
-    const { filename: image } = req.file;
-    const dep = await Depoiment.create({ actor, depoiment, image });
+    const { key: image, location: url = '' } = req.file;
+    const dep = await Depoiment.create({
+      actor,
+      depoiment,
+      image,
+      url,
+    });
     res.json(dep);
   },
   show: async (req, res) => {
