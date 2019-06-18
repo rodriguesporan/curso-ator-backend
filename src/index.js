@@ -6,7 +6,7 @@ const path = require('path');
 const routes = require('./routes');
 
 mongoose.connect(
-  `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PWD}@cluster0-rblgj.mongodb.net/${process.env.DB_NAME}?retryWrites=true&w=majority`,
+  process.env.DB_URI,
   { useNewUrlParser: true, }
 );
 const app = express();
