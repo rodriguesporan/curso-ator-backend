@@ -8,9 +8,8 @@ module.exports = {
   create: async (req, res) => {
     const { actor, depoiment } = req.body;
     const { filename: image } = req.file;
-    const dep = await Depoiment.create({ actor, depoiment, image, });
+    const dep = await Depoiment.create({ actor, depoiment, image });
     res.json(dep);
-
   },
   show: async (req, res) => {
     const { id } = req.params;
